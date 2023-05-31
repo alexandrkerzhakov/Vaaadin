@@ -1,5 +1,6 @@
 package com.website.cibercrime.data.entity;
 
+import com.vaadin.flow.component.combobox.ComboBox;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -17,34 +18,39 @@ import java.util.List;
 
 public class CrimeReport {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @NotEmpty
-    private String area;
-
+//    private ComboBox<String> areaComboBox;
+    private String areaComboBox;
+//    {
+//        areaComboBox.setItems("XXX", "DDD");
+//    }
     @NotNull
     private int messageNumber;
 
-    @NotEmpty
+//    @NotEmpty
     private LocalDate messageDate;
 
     @NotNull
     private int caseNumber;
 
-    @NotEmpty
+//    @NotEmpty
     private LocalDate caseNumberDate;
 
     @NotEmpty
     private String message;
 
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
-    private Claimant claimant;
+//    @NotNull
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "crimeReport_id")
+//    private Claimant claimant;
 
-    @NotNull
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Scammer> scammer;
+//    @NotNull
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "crimeReport_id")
+//    private List<Scammer> scammer;
 
     public CrimeReport() {
 

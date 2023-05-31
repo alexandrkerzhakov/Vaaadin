@@ -16,28 +16,29 @@ import java.util.List;
 @EqualsAndHashCode
 
 public class Claimant {
+    @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @NotEmpty
+//    @NotEmpty
     private String firstName;
 
-    @NotEmpty
-    private String secondName;
+//    @NotEmpty
+//    private String secondName;
 
-    @NotEmpty
-    private String fatherName;
+//    @NotEmpty
+//    private String fatherName;
+//
+////    @Email
+//    private String email;
 
-    @Email
-    private String email;
+//    @NotNull
+//    @OneToOne
+//    private CrimeReport crimeReport;
 
-    @NotNull
-    @OneToOne
-    private CrimeReport crimeReport;
-
-    @NotNull
-    @OneToMany
-    private List<Phone> phoneList;
+//    @NotNull
+//    @OneToMany
+//    private List<Phone> phoneList;
 }
 
