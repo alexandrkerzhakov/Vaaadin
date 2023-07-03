@@ -15,8 +15,7 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.converter.StringToDateConverter;
 import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.shared.Registration;
-//import com.website.cibercrime.data.entity.Area;
-//import com.website.cibercrime.data.entity.Claimant;
+import com.website.cibercrime.data.entity.Claimant;
 import com.website.cibercrime.data.entity.CrimeReport;
 import org.hibernate.event.spi.DeleteEvent;
 
@@ -25,19 +24,22 @@ import java.util.List;
 
 public class MessageForm extends FormLayout {
     Binder<CrimeReport> crimeReportBinder = new Binder<>(CrimeReport.class);
-
-    //    Binder<Claimant> claimantBinder = new Binder<>(Claimant.class);
     ComboBox<String> areaComboBox = new ComboBox<>("Район");
+
     {
         areaComboBox.setItems("XXX", "DDD");
     }
+
     TextField messageNumber = new TextField("КУСП");
     DatePicker messageDate = new DatePicker("Дата регистрации КУСП");
     TextField caseNumber = new TextField("УД");
     DatePicker caseNumberDate = new DatePicker("Дата возбуждения УД");
     TextField message = new TextField("Текст сообщения");
 
-//    TextField claimant = new TextField("Заявитель");
+    TextField claimantFirstName = new TextField("Имя заявителя");
+
+    TextField claimantSecondName = new TextField("Фамилия заявителя");
+    TextField claimantFatherName = new TextField("Отчество заявителя");
 
     //    TextField scammer = new TextField("Преступник");
     Button save = new Button("Сохранить");
@@ -47,8 +49,12 @@ public class MessageForm extends FormLayout {
     public void setCrimeReport(CrimeReport crimeReport) {
         crimeReportBinder.setBean(crimeReport);
     }
+//    public void setCrimeReport(CrimeReport crimeReport) {
+//        crimeReportBinder.setBean(crimeReport);
+//    }
 
     public MessageForm() {
+//        Claimant claimant = new Claimant();
         addClassName("message-form");
 
         crimeReportBinder.forField(areaComboBox)
@@ -74,6 +80,23 @@ public class MessageForm extends FormLayout {
 
         crimeReportBinder.forField(message)
                 .bind("message");
+
+//        crimeReportBinder.forField(claimant)
+//                .withConverter(new MyConverter())
+//                .bind("claimant");
+
+        crimeReportBinder.forField(claimantFirstName)
+                .bind(crimeReport -> crimeReport.getClaimant().getFirstName(),
+                        (crimeReport, firstName) -> crimeReport.getClaimant().setFirstName(firstName));
+
+        crimeReportBinder.forField(claimantSecondName)
+                .bind(crimeReport -> crimeReport.getClaimant().getSecondName(),
+                        (crimeReport, secondName) -> crimeReport.getClaimant().setSecondName(secondName));
+
+        crimeReportBinder.forField(claimantFatherName)
+                .bind(crimeReport -> crimeReport.getClaimant().getFatherName(),
+                        (crimeReport, fatherName) -> crimeReport.getClaimant().setFatherName(fatherName));
+
 //        crimeReportBinder.bindInstanceFields(this);
 //        claimantBinder.bind(claimant, Claimant::getFirstName, Claimant::setFirstName);
         add(
@@ -83,7 +106,9 @@ public class MessageForm extends FormLayout {
                 caseNumber,
                 caseNumberDate,
                 message,
-//                claimant,
+                claimantFirstName,
+                claimantSecondName,
+                claimantFatherName,
 //                scammer,
                 createButtonsLayout()
         );

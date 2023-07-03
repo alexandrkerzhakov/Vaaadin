@@ -35,8 +35,11 @@ public class StartPage extends VerticalLayout {
         img.setWidth("200px");
         add(img);
 
-        Anchor anchor = new Anchor("inputData", "Форма ввода");
-        add(anchor);
+        Anchor inputData = new Anchor("inputData", "Форма ввода");
+        add(inputData);
+
+        Anchor testData = new Anchor("testData", "Тестовая форма");
+        add(testData);
 
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);

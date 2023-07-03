@@ -7,29 +7,42 @@ import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 @Entity(name = "claimant")
 @Getter
 @Setter
+@ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode
-
 public class Claimant {
     @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
+    @ToString.Include
 //    @NotEmpty
     private String firstName;
 
+    @ToString.Include
 //    @NotEmpty
-//    private String secondName;
+    private String secondName;
 
+    @ToString.Include
 //    @NotEmpty
-//    private String fatherName;
-//
+    private String fatherName;
+
+    public Claimant() {
+        this.firstName = "defaultfirstName";
+        this.secondName = "defaultsecondName";
+        this.fatherName = "defaultfatherName";
+    }
+
+    //
 ////    @Email
 //    private String email;
 

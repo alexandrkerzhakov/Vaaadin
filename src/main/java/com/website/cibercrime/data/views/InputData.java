@@ -11,10 +11,6 @@ import com.vaadin.flow.router.Route;
 import com.website.cibercrime.data.entity.CrimeReport;
 import com.website.cibercrime.data.service.CrmService;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Route("inputData")
 public class InputData extends VerticalLayout {
 
@@ -79,14 +75,9 @@ public class InputData extends VerticalLayout {
         grid.addColumn("caseNumber").setHeader("УД");
         grid.addColumn("caseNumberDate").setHeader("Дата возбуждения УД");
         grid.addColumn("message").setHeader("Текст сообщения");
-//        grid.addColumn(crimeReport -> crimeReport.getClaimant().getFirstName()).setHeader("Заявитель");
-//        grid.addColumn(crimeReport -> crimeReport.getScammer().stream()
-//                .map(String::valueOf)
-//                .collect(Collectors.joining(" ,"))).setHeader("Преступник");
-//        grid.addColumn("claimant").setHeader("Заявитель");
-//        grid.addColumn("scammer").setHeader("Преступник");
-//        grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
-//        grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
+        grid.addColumn(crimeReport -> crimeReport.getClaimant().getFirstName()).setHeader("Имя заявителя");
+        grid.addColumn(crimeReport -> crimeReport.getClaimant().getFatherName()).setHeader("Фамилия заявителя");
+        grid.addColumn(crimeReport -> crimeReport.getClaimant().getFatherName()).setHeader("Отчество заявителя");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.asSingleSelect().addValueChangeListener(event ->
                 editCrimeReport(event.getValue()));
