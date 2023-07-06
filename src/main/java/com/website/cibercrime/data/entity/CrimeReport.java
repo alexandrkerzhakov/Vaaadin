@@ -14,8 +14,8 @@ import java.util.Objects;
 
 @Component
 @Entity(name = "crimeReport")
-//@Getter
-//@Setter
+@Getter
+@Setter
 @EqualsAndHashCode
 public class CrimeReport {
     @Id
@@ -46,63 +46,6 @@ public class CrimeReport {
     @JoinColumn(name = "crimeReport_id")
 //    @Autowired
     private Claimant claimant = new Claimant();
-
-    public String getAreaComboBox() {
-        return areaComboBox;
-    }
-
-    public void setAreaComboBox(String areaComboBox) {
-        this.areaComboBox = areaComboBox;
-    }
-
-    public int getMessageNumber() {
-        return messageNumber;
-    }
-
-    public void setMessageNumber(int messageNumber) {
-        this.messageNumber = messageNumber;
-    }
-
-    public LocalDate getMessageDate() {
-        return messageDate;
-    }
-
-    public void setMessageDate(LocalDate messageDate) {
-        this.messageDate = messageDate;
-    }
-
-    public int getCaseNumber() {
-        return caseNumber;
-    }
-
-    public void setCaseNumber(int caseNumber) {
-        this.caseNumber = caseNumber;
-    }
-
-    public LocalDate getCaseNumberDate() {
-        return caseNumberDate;
-    }
-
-    public void setCaseNumberDate(LocalDate caseNumberDate) {
-        this.caseNumberDate = caseNumberDate;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Claimant getClaimant() {
-        return claimant;
-    }
-
-    public void setClaimant(Claimant claimant) {
-        this.claimant = claimant;
-    }
-
 
     //    public CrimeReport() {
 //        this.claimant.setFirstName("");

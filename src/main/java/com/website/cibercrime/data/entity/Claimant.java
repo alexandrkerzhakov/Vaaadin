@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -50,8 +51,8 @@ public class Claimant {
 //    @OneToOne
 //    private CrimeReport crimeReport;
 
-//    @NotNull
+    @NotNull
 //    @OneToMany
-//    private List<Phone> phoneList;
+    private List<String> phones = new ArrayList<>();
 }
 

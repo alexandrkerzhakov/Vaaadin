@@ -77,11 +77,13 @@ public class InputData extends VerticalLayout {
         grid.addColumn("message").setHeader("Текст сообщения");
         grid.addColumn(crimeReport -> crimeReport.getClaimant().getFirstName()).setHeader("Имя заявителя");
         grid.addColumn(crimeReport -> crimeReport.getClaimant().getFatherName()).setHeader("Фамилия заявителя");
-        grid.addColumn(crimeReport -> crimeReport.getClaimant().getFatherName()).setHeader("Отчество заявителя");
+        grid.addColumn(crimeReport -> crimeReport.getClaimant().getSecondName()).setHeader("Отчество заявителя");
+        grid.addColumn(crimeReport -> crimeReport.getClaimant().getPhones()).setHeader("Список телефонов заявителя");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.asSingleSelect().addValueChangeListener(event ->
                 editCrimeReport(event.getValue()));
     }
+
 
     private HorizontalLayout getToolbar() {
         filterText.setPlaceholder("Filter...");

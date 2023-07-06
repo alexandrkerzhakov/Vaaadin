@@ -17,7 +17,5 @@ public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-
-
-    private String phone;
+    private String number;
 }

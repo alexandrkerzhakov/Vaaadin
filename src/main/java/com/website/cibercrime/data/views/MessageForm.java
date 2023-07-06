@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -18,9 +19,12 @@ import com.vaadin.flow.shared.Registration;
 import com.website.cibercrime.data.entity.Claimant;
 import com.website.cibercrime.data.entity.CrimeReport;
 import org.hibernate.event.spi.DeleteEvent;
+import org.jsoup.select.Collector;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MessageForm extends FormLayout {
     Binder<CrimeReport> crimeReportBinder = new Binder<>(CrimeReport.class);
@@ -35,11 +39,13 @@ public class MessageForm extends FormLayout {
     TextField caseNumber = new TextField("УД");
     DatePicker caseNumberDate = new DatePicker("Дата возбуждения УД");
     TextField message = new TextField("Текст сообщения");
-
     TextField claimantFirstName = new TextField("Имя заявителя");
-
     TextField claimantSecondName = new TextField("Фамилия заявителя");
     TextField claimantFatherName = new TextField("Отчество заявителя");
+
+    TextField claimantPhones = new TextField("Телефоны заявителя");
+//    List<TextField> claimantsPhone = new ArrayList<>();
+//    Grid<Phone> claimantsPhone = new Grid<Phone>("Список телефонов заявителя");
 
     //    TextField scammer = new TextField("Преступник");
     Button save = new Button("Сохранить");
@@ -97,6 +103,10 @@ public class MessageForm extends FormLayout {
                 .bind(crimeReport -> crimeReport.getClaimant().getFatherName(),
                         (crimeReport, fatherName) -> crimeReport.getClaimant().setFatherName(fatherName));
 
+        crimeReportBinder.forField(claimantPhones)
+                .bind(crimeReport -> String.join(",", crimeReport.getClaimant().getPhones()),
+                        (crimeReport, phoneList) -> crimeReport.getClaimant().setPhones(Arrays.stream(phoneList.split(",")).toList()));
+
 //        crimeReportBinder.bindInstanceFields(this);
 //        claimantBinder.bind(claimant, Claimant::getFirstName, Claimant::setFirstName);
         add(
@@ -109,6 +119,7 @@ public class MessageForm extends FormLayout {
                 claimantFirstName,
                 claimantSecondName,
                 claimantFatherName,
+                claimantPhones,
 //                scammer,
                 createButtonsLayout()
         );
