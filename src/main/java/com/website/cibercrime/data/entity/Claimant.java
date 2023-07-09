@@ -26,15 +26,15 @@ public class Claimant {
     private long id;
 
     @ToString.Include
-//    @NotEmpty
+    @NotEmpty
     private String firstName;
 
     @ToString.Include
-//    @NotEmpty
+    @NotEmpty
     private String secondName;
 
     @ToString.Include
-//    @NotEmpty
+    @NotEmpty
     private String fatherName;
 
     public Claimant() {
@@ -43,16 +43,9 @@ public class Claimant {
         this.fatherName = "defaultfatherName";
     }
 
-    //
-////    @Email
-//    private String email;
-
-//    @NotNull
-//    @OneToOne
-//    private CrimeReport crimeReport;
-
     @NotNull
-//    @OneToMany
-    private List<String> phones = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "claimant_id")
+    private List<Phone> phones = new ArrayList<>();
 }
 

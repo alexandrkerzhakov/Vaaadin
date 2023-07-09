@@ -12,10 +12,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-
 public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String number;
+
+    public Phone(String number) {
+        this.number = number;
+    }
+
+    public Phone() {
+
+    }
 }
