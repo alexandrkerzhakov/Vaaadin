@@ -10,6 +10,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.website.cibercrime.data.entity.CrimeSummary;
 import com.website.cibercrime.data.entity.Phone;
+import com.website.cibercrime.data.entity.Scammer;
 import com.website.cibercrime.data.form.CrimeSummaryForm;
 import com.website.cibercrime.data.service.CrmService;
 
@@ -81,6 +82,8 @@ public class CrimeSummaryViews extends VerticalLayout {
         grid.addColumn(crimeSummary -> crimeSummary.getClaimant().getFatherName()).setHeader("Фамилия заявителя");
         grid.addColumn(crimeSummary -> crimeSummary.getClaimant().getSecondName()).setHeader("Отчество заявителя");
         grid.addColumn(crimeSummary -> crimeSummary.getClaimant().getPhones().stream().map(Phone::getNumber).toList()).setHeader("Список телефонов заявителя");
+        grid.addColumn(crimeSummary -> crimeSummary.getScammers().stream().map(scammer -> scammer.getFirstName()).toList()).setHeader("Список преступников");
+//        grid.addColumn(crimeSummary -> crimeSummary.getScammers().stream().map(scammer -> scammer.getPhoneList().stream().map(Phone::getNumber).toList())).setHeader("Список телефонов преступников");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.asSingleSelect().addValueChangeListener(event ->
                 editCrimeSummaryForm(event.getValue()));

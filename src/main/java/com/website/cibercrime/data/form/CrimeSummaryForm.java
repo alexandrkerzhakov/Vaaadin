@@ -16,6 +16,7 @@ import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.shared.Registration;
 import com.website.cibercrime.data.entity.CrimeSummary;
 import com.website.cibercrime.data.entity.Phone;
+import com.website.cibercrime.data.entity.Scammer;
 
 import java.util.Arrays;
 
@@ -37,12 +38,11 @@ public class CrimeSummaryForm extends FormLayout {
     TextField claimantFirstName = new TextField("Имя заявителя");
     TextField claimantSecondName = new TextField("Фамилия заявителя");
     TextField claimantFatherName = new TextField("Отчество заявителя");
-
     TextField claimantPhones = new TextField("Телефоны заявителя");
-//    List<TextField> claimantsPhone = new ArrayList<>();
-//    Grid<Phone> claimantsPhone = new Grid<Phone>("Список телефонов заявителя");
 
-    //    TextField scammer = new TextField("Преступник");
+    TextField scammerFirstName = new TextField("Фамилия преступника");
+
+//    TextField scammerPhones = new TextField("Телефоны преступника");
     Button save = new Button("Сохранить");
     Button delete = new Button("Удалить");
     Button close = new Button("Отмена");
@@ -60,6 +60,9 @@ public class CrimeSummaryForm extends FormLayout {
         grid.addColumn(crimeSummary -> crimeSummary.getClaimant().getFirstName()).setHeader("Имя заявителя");
         grid.addColumn(crimeSummary -> crimeSummary.getClaimant().getFatherName()).setHeader("Фамилия заявителя");
         grid.addColumn(crimeSummary -> crimeSummary.getClaimant().getSecondName()).setHeader("Отчество заявителя");
+        grid.addColumn(crimeSummary -> crimeSummary.getScammers().stream().map(scammer -> scammer.getFirstName()).toList()).setHeader("Имя преступника");
+//        grid.addColumn(crimeSummary -> crimeSummary.getScammers().stream().map(scammer -> scammer.getPhoneList().stream().map(Phone::getNumber).toList())).setHeader("Список телефонов преступников");
+
 
         addClassName("message-form");
 
@@ -109,6 +112,15 @@ public class CrimeSummaryForm extends FormLayout {
                                 .toList())
                 );
 
+        crimeSummaryBinder.forField(scammerFirstName)
+                .bind(crimeSummary -> String.join(",", crimeSummary.getScammers().stream().map(scammer -> scammer.getFirstName()).toList()),
+                        ((crimeSummary, scammerLine) -> crimeSummary.setScammers(Arrays
+                                .stream(scammerLine.split(","))
+                                .map(scammer -> new Scammer())
+                                .toList())
+                        ));
+
+
         add(
                 areaComboBox,
                 messageNumber,
@@ -120,6 +132,8 @@ public class CrimeSummaryForm extends FormLayout {
                 claimantSecondName,
                 claimantFatherName,
                 claimantPhones,
+                scammerFirstName,
+//                scammerPhones,
                 createButtonsLayout()
         );
     }

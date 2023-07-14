@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @Entity(name = "crimeSummary")
 @Getter
@@ -27,13 +30,24 @@ public class CrimeSummary {
 
 //    @JoinColumn(name = "crimeSummary_id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private CrimeCase crimeCase = new CrimeCase();
+//    private CrimeCase crimeCase = new CrimeCase();
+    private CrimeCase crimeCase;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "crimeSummary_id")
 //    @Autowired
     private Claimant claimant = new Claimant();
+
+
+    @NotNull
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Scammer> scammers = new ArrayList<>();
+
+    {
+        Scammer scammer = new Scammer("xxxxxxx");
+        scammers.add(scammer);
+    }
 
     public CrimeSummary() {
 

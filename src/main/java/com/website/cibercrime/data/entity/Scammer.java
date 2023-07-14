@@ -21,30 +21,29 @@ public class Scammer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-//    @NotNull
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "scammer_id")
-//    private ArrayList list;
-
     @NotEmpty
     private String firstName;
 
-    @NotEmpty
-    private String secondName;
+//    @NotEmpty
+//    private String secondName;
+//
+//    @NotEmpty
+//    private String fatherName;
+//
+//    @Email
+//    private String email;
 
-    @NotEmpty
-    private String fatherName;
 
-    @Email
-    private String email;
-
-
-    @NotNull
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "scammer_id")
-    private List<Phone> phoneList;
+//    @NotNull
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "scammer_id")
+//    private List<Phone> phoneList;
 
     public Scammer() {
+    }
+
+    public Scammer(String firstName) {
+        this.firstName = firstName;
     }
 
 }
